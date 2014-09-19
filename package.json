@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Coredata API service for AngularJS",
   "main": "js/app.js",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/Ikornaselur/coredata-api-service"
+  },
   "directories": {
     "test": "tests"
   },
