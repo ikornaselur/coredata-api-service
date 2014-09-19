@@ -4,3 +4,6 @@ tests/coverage
 
 # Dependency directory
 node_modules
+
+# Node logs
+*.log
