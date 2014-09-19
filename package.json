@@ -1,0 +1,24 @@
+{
+  "name": "coredata-api-service",
+  "version": "0.0.1",
+  "description": "Coredata API service for AngularJS",
+  "main": "js/app.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "karma": "~0.12.23"
+  },
+  "devDependencies": {
+    "karma": "^0.12.23",
+    "karma-coverage": "^0.2.6",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "karma-junit-reporter": "^0.2.2"
+  },
+  "scripts": {
+    "test": "node_modules/karma/bin/karma start tests/config/karma.unit.js"
+  },
+  "author": "Axel Örn Sigurðsson",
+  "license": "MIT"
+}

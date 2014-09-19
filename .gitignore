@@ -1,0 +1,6 @@
+# Coverage directory used by tools like istanbul
+tests/results
+tests/coverage
+
+# Dependency directory
+node_modules
