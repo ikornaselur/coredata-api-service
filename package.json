@@ -21,7 +21,8 @@
     "karma-junit-reporter": "^0.2.2"
   },
   "scripts": {
-    "test": "node_modules/karma/bin/karma start tests/config/karma.unit.js"
+    "test": "node_modules/karma/bin/karma start tests/config/karma.unit.js",
+    "test-watch": "node_modules/karma/bin/karma start tests/config/karma.unit.js --auto-watch --no-single-run"
   },
   "author": "Axel Örn Sigurðsson",
   "license": "MIT"
