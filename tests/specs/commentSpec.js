@@ -36,7 +36,7 @@ describe('API - Comments', function () {
         testEndpoint = _endpoint_;
     }));
 
-    xdescribe('/comments [GET]', function () {
+    describe('/comments [GET]', function () {
         var res;
         beforeEach(function () {
             res = {
@@ -61,6 +61,20 @@ describe('API - Comments', function () {
                 });
                 httpBackend.flush();
             });
+            it('should reject the promise if the API call fails', function () {
+                var errorCode = 404;
+                var errorMsg = 'test error';
+                httpBackend.whenGET(testEndpoint + '/comments').respond(errorCode, errorMsg);
+
+                var successSpy = jasmine.createSpy('success');
+                var failSpy = jasmine.createSpy('fail');
+
+                coredataApi.comments().then(successSpy, failSpy);
+                httpBackend.flush();
+
+                expect(successSpy).not.toHaveBeenCalled();
+                expect(failSpy).toHaveBeenCalledWith(errorCode + ': ' + errorMsg);
+            });
         });
         describe('with a filter', function () {
             it('should call the API correctly', function () {
@@ -75,7 +89,7 @@ describe('API - Comments', function () {
     
     describe('/comments [POST]', function () {
         it('should post to the API correctly', function () {
-            httpBackend.expectPOST(testEndpoint + '/comments');
+            httpBackend.expectPOST(testEndpoint + '/comments').respond(201);
             coredataApi.addComment('', ''); 
             httpBackend.flush();
         });
@@ -97,12 +111,14 @@ describe('API - Comments', function () {
             expect(failSpy).not.toHaveBeenCalled();
         });
         it('should get call the return a promise and .fail() if the API return fail', function () {
+            var errorCode = 500;
+            var errorMsg = 'test error';
             var comment = 'test comment';
             var docId = '888b4dba-4027-11e4-a3fa-0021ccc2cbcb';
             httpBackend.whenPOST(testEndpoint + '/comments', {
                 'text': comment,
                 'doc_id': docId
-            }).respond(500);
+            }).respond(errorCode, errorMsg);
 
             var successSpy = jasmine.createSpy('success');
             var failSpy = jasmine.createSpy('fail');
@@ -111,14 +127,14 @@ describe('API - Comments', function () {
             httpBackend.flush();
 
             expect(successSpy).not.toHaveBeenCalled();
-            expect(failSpy).toHaveBeenCalled();
+            expect(failSpy).toHaveBeenCalledWith(errorCode + ': ' + errorMsg);
         });
     });
 
     describe('/comments/{id} [GET]', function () {
         it('should call the API correctly', function () {
             var commentId = 1;
-            httpBackend.expectGET(testEndpoint + '/comments/' + commentId);
+            httpBackend.expectGET(testEndpoint + '/comments/' + commentId).respond(200);
             coredataApi.getComment(commentId);
             httpBackend.flush();
         });
@@ -136,8 +152,10 @@ describe('API - Comments', function () {
             expect(failSpy).not.toHaveBeenCalled();
         });
         it('should fail a promise if the comment does not exist', function () {
+            var errorCode = 404;
+            var errorMsg = 'test error';
             var commentId = 0;
-            httpBackend.whenGET(testEndpoint + '/comments/' + commentId).respond(404);
+            httpBackend.whenGET(testEndpoint + '/comments/' + commentId).respond(errorCode, errorMsg);
             var successSpy = jasmine.createSpy('success');
             var failSpy = jasmine.createSpy('fail');
 
@@ -145,7 +163,7 @@ describe('API - Comments', function () {
             httpBackend.flush();
 
             expect(successSpy).not.toHaveBeenCalled();
-            expect(failSpy).toHaveBeenCalled();
+            expect(failSpy).toHaveBeenCalledWith(errorCode + ': ' + errorMsg);
         });
     });
 });

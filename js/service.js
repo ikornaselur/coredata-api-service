@@ -16,18 +16,31 @@ angular.module('coredata.api.service')
                     defer.resolve(data['objects']);
                 })
                 .error(function error(msg, status) {
-                    defer.reject(msg);
+                    defer.reject(status + ': ' + msg);
                 });
             return defer.promise;
         },
         addComment: function addComment(data) {
-
+            var defer = $q.defer();
+            $http.post(endpoint + '/comments')
+                .success(function (data, status) {
+                    defer.resolve(status);
+                })
+                .error(function (msg, status) {
+                    defer.reject(status + ': ' + msg);
+                });
+            return defer.promise;
         },
         getComment: function getComment(id) {
-            return {
-                'id': 1,
-                'test': 'Yolo swagger'
-            }
+            var defer = $q.defer();
+            $http.get(endpoint + '/comments/' + id)
+                .success(function (data, status) {
+                    defer.resolve(data);
+                })
+                .error(function (msg, status) {
+                    defer.reject(status + ': ' + msg);
+                });
+            return defer.promise;
         }
     }
 }]);
