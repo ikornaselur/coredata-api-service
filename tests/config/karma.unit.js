@@ -9,7 +9,7 @@ module.exports = function (config) {
 
             // Application files
             'js/app.js',
-            'js/*.js',
+            'js/services/*.js',
 
             // Test files
             'tests/specs/*.js'

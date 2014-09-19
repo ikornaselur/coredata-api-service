@@ -1,7 +1,7 @@
 'use strict';
 
 describe('API - Comments', function () {
-    var coredataApi, httpBackend, testEndpoint;
+    var Comments, httpBackend, testEndpoint;
     var mockList = [
         {
             'author': '/api/v2/users/Administrator',
@@ -30,8 +30,8 @@ describe('API - Comments', function () {
 
     beforeEach(module('coredata.api.service'));
 
-    beforeEach(inject(function (_coredataApi_, _endpoint_, $httpBackend) {
-        coredataApi = _coredataApi_;
+    beforeEach(inject(function (_Comments_, _endpoint_, $httpBackend) {
+        Comments = _Comments_;
         httpBackend = $httpBackend;
         testEndpoint = _endpoint_;
     }));
@@ -50,13 +50,13 @@ describe('API - Comments', function () {
             });
             it('should call the API correctly', function () {
                 httpBackend.expectGET(testEndpoint + '/comments').respond(res);
-                coredataApi.comments();
+                Comments.getComments();
                 httpBackend.flush();
             });
             it('should return a list of comments', function () {
                 httpBackend.whenGET(testEndpoint + '/comments').respond(res);
 
-                coredataApi.comments().then(function (comments) {
+                Comments.getComments().then(function (comments) {
                     expect(comments).toEqual(mockList);
                 });
                 httpBackend.flush();
@@ -69,7 +69,7 @@ describe('API - Comments', function () {
                 var successSpy = jasmine.createSpy('success');
                 var failSpy = jasmine.createSpy('fail');
 
-                coredataApi.comments().then(successSpy, failSpy);
+                Comments.getComments().then(successSpy, failSpy);
                 httpBackend.flush();
 
                 expect(successSpy).not.toHaveBeenCalled();
@@ -81,7 +81,7 @@ describe('API - Comments', function () {
                 var limit = 1;
                 res['meta']['total_count'] = limit;
                 httpBackend.expectGET(testEndpoint + '/comments?limit=' + limit).respond(res);
-                coredataApi.comments({'limit': limit});
+                Comments.getComments({'limit': limit});
                 httpBackend.flush();
             });
         });
@@ -90,7 +90,7 @@ describe('API - Comments', function () {
     describe('/comments [POST]', function () {
         it('should post to the API correctly', function () {
             httpBackend.expectPOST(testEndpoint + '/comments').respond(201);
-            coredataApi.addComment('', ''); 
+            Comments.addComment('', ''); 
             httpBackend.flush();
         });
         it('should get call the return a promise and .success() if the API returns success', function () {
@@ -104,7 +104,7 @@ describe('API - Comments', function () {
             var successSpy = jasmine.createSpy('success');
             var failSpy = jasmine.createSpy('fail');
 
-            coredataApi.addComment(comment, docId).then(successSpy, failSpy);
+            Comments.addComment(comment, docId).then(successSpy, failSpy);
             httpBackend.flush();
 
             expect(successSpy).toHaveBeenCalled();
@@ -123,7 +123,7 @@ describe('API - Comments', function () {
             var successSpy = jasmine.createSpy('success');
             var failSpy = jasmine.createSpy('fail');
 
-            coredataApi.addComment(comment, docId).then(successSpy, failSpy);
+            Comments.addComment(comment, docId).then(successSpy, failSpy);
             httpBackend.flush();
 
             expect(successSpy).not.toHaveBeenCalled();
@@ -135,7 +135,7 @@ describe('API - Comments', function () {
         it('should call the API correctly', function () {
             var commentId = 1;
             httpBackend.expectGET(testEndpoint + '/comments/' + commentId).respond(200);
-            coredataApi.getComment(commentId);
+            Comments.getComment(commentId);
             httpBackend.flush();
         });
         it('should return a single comment if it exists', function () {
@@ -143,7 +143,7 @@ describe('API - Comments', function () {
             httpBackend.whenGET(testEndpoint + '/comments/' + commentId).respond(mockList[0]);
             
             var failSpy = jasmine.createSpy('fail');
-            coredataApi.getComment(commentId).then(function (comment) {
+            Comments.getComment(commentId).then(function (comment) {
                 expect(comment).toEqual(mockList[0]);
             }, failSpy);
             
@@ -159,7 +159,7 @@ describe('API - Comments', function () {
             var successSpy = jasmine.createSpy('success');
             var failSpy = jasmine.createSpy('fail');
 
-            coredataApi.getComment(commentId).then(successSpy, failSpy);
+            Comments.getComment(commentId).then(successSpy, failSpy);
             httpBackend.flush();
 
             expect(successSpy).not.toHaveBeenCalled();

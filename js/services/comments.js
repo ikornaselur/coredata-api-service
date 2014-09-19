@@ -1,7 +1,7 @@
 angular.module('coredata.api.service')
-.service('coredataApi', ['endpoint', '$http', '$q', function (endpoint, $http, $q) {
+.service('Comments', ['endpoint', '$http', '$q', function (endpoint, $http, $q) {
     return {
-        comments: function comments(filters) {
+        getComments: function getComments(filters) {
             var filter = "?";
             if (typeof filters !== 'undefined') {
                 for (f in filters) {
