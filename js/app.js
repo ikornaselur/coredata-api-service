@@ -1,3 +1,4 @@
 'use strict';
 
-angular.module('coredata.api.service', []);
+angular.module('coredata.api.service', [])
+    .constant('endpoint', 'http://localhost:8100/api/v2');
