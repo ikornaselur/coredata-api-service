@@ -15,7 +15,7 @@ module.exports = function (config) {
             'tests/specs/*.js'
         ],
         preprocessors: {
-            'js/*.js': ['coverage']
+            'js/**/*.js': ['coverage']
         },
         coverageReporter: {
             reporters: [
