@@ -19,21 +19,18 @@
     "karma-phantomjs-launcher": "^0.1.4",
     "karma-jasmine": "^0.1.5",
     "karma-junit-reporter": "^0.2.2",
+    "karma-browserify": "^0.2.1",
+    "karma-failed-reporter": "0.0.2",
     "gulp-concat": "^2.4.1",
-    "gulp-clean": "^0.3.1",
-    "gulp-util": "^3.0.1",
     "gulp": "^3.8.8",
     "gulp-jshint": "^1.8.4",
     "gulp-karma": "0.0.4",
     "gulp-browserify": "^0.5.0",
     "browserify": "^4.0.0",
-    "jshint-stylish": "^1.0.0",
-    "karma-browserify": "^0.2.1",
-    "karma-failed-reporter": "0.0.2"
+    "jshint-stylish": "^1.0.0"
   },
   "scripts": {
-    "test": "node_modules/karma/bin/karma start tests/config/karma.unit.js",
-    "test-watch": "node_modules/karma/bin/karma start tests/config/karma.unit.js --auto-watch --no-single-run"
+    "test": "gulp test"
   },
   "author": "Axel Örn Sigurðsson",
   "license": "MIT"

@@ -1,9 +1,7 @@
 var gulp = require('gulp'),
-    gutil = require('gulp-util'),
     jshint = require('gulp-jshint'),
     browserify = require('gulp-browserify'),
     concat = require('gulp-concat'),
-    clean = require('gulp-clean'),
     karma = require('karma').server;
 
 // JSHint task
