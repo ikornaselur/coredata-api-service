@@ -7,3 +7,6 @@ node_modules
 
 # Node logs
 *.log
+
+# Ignore dist files
+dist/
