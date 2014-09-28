@@ -28,7 +28,7 @@ describe('API - Comments', function () {
     'total_count': 0
   };
 
-  beforeEach(module('coredata.api.service'));
+  beforeEach(module('coredata.api'));
 
   beforeEach(inject(function (_Comments_, _endpoint_, $httpBackend) {
     Comments = _Comments_;

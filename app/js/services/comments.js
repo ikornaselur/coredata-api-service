@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('coredata.api.service')
+angular.module('coredata.api')
   .service('Comments', ['endpoint', '$http', '$q', function (endpoint, $http, $q) {
     return {
       getComments: function getComments(filters) {

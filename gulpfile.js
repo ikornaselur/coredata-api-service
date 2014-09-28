@@ -19,7 +19,7 @@ gulp.task('dist', function () {
     debug: false
   }))
   .pipe(concat('coredata-api-service.js'))
-  .pipe(gulp.dest('dist/js'));
+  .pipe(gulp.dest('dist'));
 });
 
 // Unit test task
