@@ -26,7 +26,7 @@ describe('API - Comments', function () {
         'offset': 0,
         'previous': null,
         'total_count': 0
-    }
+    };
 
     beforeEach(module('coredata.api.service'));
 
@@ -42,11 +42,12 @@ describe('API - Comments', function () {
             res = {
                 'meta': defaultMeta,
                 'objects': mockList
-            }
+            };
         });
         describe('no filters', function () {
             beforeEach(function () {
-                res['meta']['total_count'] = 2;
+              /* jshint camelcase: false */
+              res.meta.total_count = 2;
             });
             it('should call the API correctly', function () {
                 httpBackend.expectGET(testEndpoint + '/comments').respond(res);
@@ -79,7 +80,8 @@ describe('API - Comments', function () {
         describe('with a filter', function () {
             it('should call the API correctly', function () {
                 var limit = 1;
-                res['meta']['total_count'] = limit;
+                /* jshint camelcase: false */
+                res.meta.total_count = limit;
                 httpBackend.expectGET(testEndpoint + '/comments?limit=' + limit).respond(res);
                 Comments.getComments({'limit': limit});
                 httpBackend.flush();

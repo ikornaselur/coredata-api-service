@@ -1,21 +1,23 @@
+'use strict';
+
 module.exports = function (config) {
     config.set({
         basePath: '../..',
-        frameworks: ['jasmine'],
+        frameworks: ['jasmine', 'browserify'],
         files: [
             // Angular libraries
-            'lib/angular.js',
-            'lib/angular-mocks.js',
+            'app/lib/angular.js',
+            'app/lib/angular-mocks.js',
 
             // Application files
-            'js/app.js',
-            'js/services/*.js',
+            'app/js/app.js',
+            'app/js/services/*.js',
 
             // Test files
             'tests/specs/*.js'
         ],
         preprocessors: {
-            'js/**/*.js': ['coverage']
+            'app/js/**/*.js': ['coverage', 'browserify'],
         },
         coverageReporter: {
             reporters: [
@@ -33,5 +35,5 @@ module.exports = function (config) {
         logLevel: config.LOG_INFO,
         browsers: ['PhantomJS'],
         singleRun: true
-    })
-}
+    });
+};
