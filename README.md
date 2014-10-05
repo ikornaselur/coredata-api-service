@@ -13,15 +13,34 @@ To install dependencies simply run the following command in the root of the proj
 npm install
 ```
 
-## Tests
-To run the tests, simply run the following npm command
+## Gulp tasks
 
-``` 
-npm test
+#### Lint
+Runs JSHint on the project
+```
+gulp lint
 ```
 
-This will run all the tests once. To have the karma test runner watch the service and tests and rerun tests on each change, simply run
-
+#### Run tests
+Runs the karma unit tests 
 ```
-npm run test-watch
+gulp test
+```
+
+#### Package into a single file
+Packages the service into a single file at `./dist/coredata-api-service.js`
+```
+gulp dist
+```
+
+#### Gulp Watch to test, lint and package on each change
+Runs all the tasks mentioned above on each file change
+```
+gulp watch
+```
+
+#### Default task
+Runs `test`, `lint` and `dist` once
+```
+gulp
 ```
