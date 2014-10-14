@@ -6,8 +6,8 @@ module.exports = function (config) {
         frameworks: ['jasmine', 'browserify'],
         files: [
             // Angular libraries
-            'app/lib/angular.js',
-            'app/lib/angular-mocks.js',
+            'node_modules/angular/angular.js',
+            'node_modules/angular-mocks/angular-mocks.js',
 
             // Application files
             'app/js/app.js',
