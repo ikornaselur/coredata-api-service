@@ -7,7 +7,9 @@ angular.module('coredata.api')
         var filter = '?';
         if (typeof filters !== 'undefined') {
           for (var f in filters) {
-            filter += f + '=' + filters[f] + '&';
+            if (filters.hasOwnProperty(f)) {
+              filter += f + '=' + filters[f] + '&';
+            }
           }
         }
         filter = filter.substring(0, filter.length - 1);
@@ -23,10 +25,18 @@ angular.module('coredata.api')
         return defer.promise;
       },
       getDoc: function getDoc(id) {
-
+        var defer = $q.defer();
+        $http.get(endpoint + '/docs/' + id)
+          .success(function success(data) {
+            defer.resolve(data);
+          })
+          .error(function error(msg, status) {
+            defer.reject(status + ': ' + msg);
+          });
+        return defer.promise;
       },
       deleteDoc: function deleteDoc(id) {
 
       }
-    }
+    };
   }]);
