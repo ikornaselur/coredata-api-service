@@ -1,6 +1,6 @@
 'use strict';
 
-ddescribe('API - Docs', function () {
+describe('API - Docs', function () {
   var Docs, httpBackend, testEndpoint;
   var mockList = [
     {
@@ -97,7 +97,7 @@ ddescribe('API - Docs', function () {
         /* jshint camelcase: false */
         res.meta.total_count = limit;
         httpBackend.expectGET(testEndpoint + '/docs?limit=' + limit).respond(res);
-        Docs.getdocs({'limit': limit});
+        Docs.getDocs({'limit': limit});
         httpBackend.flush();
       });
       
@@ -107,7 +107,7 @@ ddescribe('API - Docs', function () {
         /* jshint camelcase: false */
         res.meta.total_count = limit;
         httpBackend.expectGET(testEndpoint + '/docs?limit=' + limit + '&offset=' + offset).respond(res);
-        Docs.getdocs({'limit': limit, 'offset': offset});
+        Docs.getDocs({'limit': limit, 'offset': offset});
         httpBackend.flush();
       });
     });
