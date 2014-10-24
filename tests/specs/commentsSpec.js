@@ -82,12 +82,21 @@ describe('API - Comments', function () {
     });
 
     describe('with a filter', function () {
-      it('should call the API correctly', function () {
+      it('should call the API correctly with one filter', function () {
         var limit = 1;
         /* jshint camelcase: false */
         res.meta.total_count = limit;
         httpBackend.expectGET(testEndpoint + '/comments?limit=' + limit).respond(res);
         Comments.getComments({'limit': limit});
+        httpBackend.flush();
+      });
+      it('should call the API correctly with more than one filter', function () {
+        var limit = 1;
+        var offset = 0;
+        /* jshint camelcase: false */
+        res.meta.total_count = limit;
+        httpBackend.expectGET(testEndpoint + '/comments?limit=' + limit + '&offset=' + offset).respond(res);
+        Comments.getComments({'limit': limit, 'offset': offset});
         httpBackend.flush();
       });
     });
