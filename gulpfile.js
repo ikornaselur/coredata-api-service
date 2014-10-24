@@ -43,4 +43,14 @@ gulp.task('watch', ['lint'], function () {
   ]);
 });
 
+gulp.task('lint-watch', ['lint'], function () {
+  gulp.watch([
+    './app/js/app.js', 
+    './app/js/**/*.js', 
+    './tests/config/*.js', 
+    './tests/specs/*.js'
+  ], [
+    'lint'
+  ]);
+});
 gulp.task('default', ['test', 'lint', 'dist']);

@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('coredata.api')
-  .service('Comments', ['endpoint', '$http', '$q', function (endpoint, $http, $q) {
+  .service('Docs', ['endpoint', '$http', '$q', function (endpoint, $http, $q) {
     return {
-      getComments: function getComments(filters) {
+      getDocs: function getDocs(filters) {
         var filter = '?';
         if (typeof filters !== 'undefined') {
           for (var f in filters) {
@@ -15,7 +15,7 @@ angular.module('coredata.api')
         filter = filter.substring(0, filter.length - 1);
 
         var defer = $q.defer();
-        $http.get(endpoint + '/comments' + filter)
+        $http.get(endpoint + '/docs' + filter)
           .success(function success(data) {
             defer.resolve(data.objects);
           })
@@ -24,22 +24,22 @@ angular.module('coredata.api')
           });
         return defer.promise;
       },
-      addComment: function addComment(comment, id) {
+      getDoc: function getDoc(id) {
         var defer = $q.defer();
-        $http.post(endpoint + '/comments', {'text': comment, 'doc_id': id})
-          .success(function (data, status) {
-            defer.resolve(status);
+        $http.get(endpoint + '/docs/' + id)
+          .success(function success(data) {
+            defer.resolve(data);
           })
-          .error(function (msg, status) {
+          .error(function error(msg, status) {
             defer.reject(status + ': ' + msg);
           });
         return defer.promise;
       },
-      getComment: function getComment(id) {
+      deleteDoc: function deleteDoc(id) {
         var defer = $q.defer();
-        $http.get(endpoint + '/comments/' + id)
-          .success(function success(data) {
-            defer.resolve(data);
+        $http.delete(endpoint + '/docs/' + id)
+          .success(function success(_, status) {
+            defer.resolve(status);
           })
           .error(function error(msg, status) {
             defer.reject(status + ': ' + msg);
@@ -48,4 +48,3 @@ angular.module('coredata.api')
       }
     };
   }]);
-
