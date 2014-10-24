@@ -156,8 +156,15 @@ describe('API - Docs', function () {
     it('should call the API correctly', function () {
       var docId = '67d0acf0-5b61-11e4-a5ed-0021ccc2cbcb';
       httpBackend.expectDELETE(testEndpoint + '/docs/' + docId).respond(200);
-      Docs.deleteDoc(docId);
+
+      var successSpy = jasmine.createSpy('success');
+      var failSpy = jasmine.createSpy('fail');
+
+      Docs.deleteDoc(docId).then(successSpy, failSpy);
       httpBackend.flush();
+
+      expect(successSpy).toHaveBeenCalledWith(200);
+      expect(failSpy).not.toHaveBeenCalled();
     });
 
     it('should fail a promise if unable to delete doc', function () {

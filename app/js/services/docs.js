@@ -36,7 +36,15 @@ angular.module('coredata.api')
         return defer.promise;
       },
       deleteDoc: function deleteDoc(id) {
-
+        var defer = $q.defer();
+        $http.delete(endpoint + '/docs/' + id)
+          .success(function success(_, status) {
+            defer.resolve(status);
+          })
+          .error(function error(msg, status) {
+            defer.reject(status + ': ' + msg);
+          });
+        return defer.promise;
       }
     };
   }]);
